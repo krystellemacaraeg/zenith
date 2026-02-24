@@ -1,0 +1,53 @@
+/* The dark canvas everything lives on */
+.appShell {
+  min-height: 100vh;
+  background-color: #0D0D12;
+  color: #E2E8F0;
+  font-family: 'Inter', sans-serif;
+  padding: 2rem;
+}
+
+/* Temporary debug panel styling - functional ugly, not final UI */
+.debugPanel {
+  background-color: #16161E;
+  border: 1px solid #8B5CF6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.debugPanel h1 {
+  color: #8B5CF6;
+  margin-bottom: 1rem;
+}
+
+.debugPanel pre {
+  color: #F59E0B;
+  font-size: 0.85rem;
+  background: #0D0D12;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.debugButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.debugButtons button {
+  background: #8B5CF6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.debugButtons button:hover {
+  opacity: 0.85;
+}
