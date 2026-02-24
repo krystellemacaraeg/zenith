@@ -1,24 +1,23 @@
-/* Sticky header - always visible, everything scrolls beneath it */
 .heroHeader {
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
   background-color: #16161E;
   border-bottom: 1px solid rgba(139, 92, 246, 0.25);
   backdrop-filter: blur(8px);
+  box-sizing: border-box;
 }
 
-/* Inner wrapper mirrors the pageContent centering */
 .heroInner {
-  max-width: 780px;
-  margin: 0 auto;
+  width: 100%;
   padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+  box-sizing: border-box;
 }
 
-/* Avatar circle - violet ring border */
 .avatarWrapper {
   flex-shrink: 0;
   width: 48px;
@@ -32,7 +31,6 @@
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.35);
 }
 
-/* The block holding both HP and XP bars */
 .statsBlock {
   display: flex;
   flex-direction: column;
@@ -41,7 +39,6 @@
   min-width: 0;
 }
 
-/* Each label + track + numbers row */
 .statBarGroup {
   display: flex;
   align-items: center;
@@ -57,7 +54,6 @@
   flex-shrink: 0;
 }
 
-/* The grey track that the fill sits inside */
 .statTrack {
   flex: 1;
   height: 8px;
@@ -67,11 +63,9 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Base fill styles - color classes applied per bar */
 .statFill {
   height: 100%;
   border-radius: 999px;
-  /* Width is controlled by Framer Motion's animate prop, not here */
 }
 
 .hpFill {
@@ -82,7 +76,6 @@
   background-color: #8B5CF6;
 }
 
-/* XP bar glow - makes the bar look lit from within */
 .xpGlow {
   box-shadow: 0 0 8px rgba(139, 92, 246, 0.7), 0 0 16px rgba(139, 92, 246, 0.35);
 }
@@ -95,7 +88,6 @@
   flex-shrink: 0;
 }
 
-/* Gold bordered level circle */
 .levelBadge {
   flex-shrink: 0;
   width: 52px;
@@ -125,7 +117,6 @@
   line-height: 1;
 }
 
-/* Gold counter beside the level badge */
 .goldCounter {
   flex-shrink: 0;
   display: flex;

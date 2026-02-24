@@ -1,9 +1,10 @@
 .boardWrapper {
-  /* max-width and margin centering moved up to App.module.css pageContent */
-  padding: 2rem 0;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .boardHeader {
@@ -24,7 +25,6 @@
   color: #475569;
 }
 
-/* Add Quest Form */
 .addQuestForm {
   display: flex;
   flex-direction: column;
@@ -34,6 +34,8 @@
   border-radius: 12px;
   padding: 1rem 1.25rem;
   margin-bottom: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .titleInput {
@@ -46,15 +48,11 @@
   width: 100%;
   outline: none;
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 
-.titleInput:focus {
-  border-color: #8B5CF6;
-}
-
-.titleInput::placeholder {
-  color: #475569;
-}
+.titleInput:focus { border-color: #8B5CF6; }
+.titleInput::placeholder { color: #475569; }
 
 .formControls {
   display: flex;
@@ -63,7 +61,6 @@
   flex-wrap: wrap;
 }
 
-/* Difficulty pill buttons */
 .difficultyGroup {
   display: flex;
   gap: 0.35rem;
@@ -87,7 +84,6 @@
   color: #C4B5FD;
 }
 
-/* Daily checkbox toggle */
 .dailyToggle {
   display: flex;
   align-items: center;
@@ -105,7 +101,6 @@
   cursor: pointer;
 }
 
-/* Submit button — pushed to the right with margin-left: auto */
 .submitBtn {
   margin-left: auto;
   background-color: #8B5CF6;
@@ -119,15 +114,9 @@
   transition: opacity 0.2s, transform 0.15s;
 }
 
-.submitBtn:hover {
-  opacity: 0.88;
-}
+.submitBtn:hover  { opacity: 0.88; }
+.submitBtn:active { transform: scale(0.97); }
 
-.submitBtn:active {
-  transform: scale(0.97);
-}
-
-/* Empty state message */
 .emptyState {
   text-align: center;
   padding: 3rem 1rem;

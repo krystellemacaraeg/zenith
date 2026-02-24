@@ -1,0 +1,98 @@
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background-color: #16161E;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Brand lockup at the top */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0.5rem 1.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 1rem;
+}
+
+.brandIcon {
+  font-size: 1.4rem;
+}
+
+.brandName {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #E2E8F0;
+  letter-spacing: 0.04em;
+}
+
+/* Nav list */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Each nav button */
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #64748B;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  transition: color 0.15s;
+}
+
+.navItem:hover {
+  color: #E2E8F0;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.navItemActive {
+  color: #E2E8F0;
+}
+
+.navIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.navLabel {
+  position: relative;
+  z-index: 1;
+}
+
+/* The sliding violet background pill - Framer Motion moves this between items */
+.activePill {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background-color: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  z-index: 0;
+}
+
+/* Tagline at the bottom */
+.sidebarFooter {
+  margin-top: auto;
+  padding: 0 0.5rem;
+  font-size: 0.72rem;
+  color: #334155;
+  line-height: 1.6;
+  font-style: italic;
+}

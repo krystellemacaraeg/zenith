@@ -6,9 +6,10 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   padding: 1rem 1.25rem;
-  /* Subtle left accent border for visual depth */
   border-left: 3px solid rgba(139, 92, 246, 0.4);
   transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -35,13 +36,11 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: #E2E8F0;
-  /* Prevent long titles from breaking the layout */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Difficulty tags */
 .difficultyTag {
   font-size: 0.65rem;
   font-weight: 700;
@@ -52,31 +51,15 @@
   flex-shrink: 0;
 }
 
-.tagEasy {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #10B981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
+.tagEasy   { background-color: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.tagMedium { background-color: rgba(245, 158, 11, 0.15);  color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+.tagHard   { background-color: rgba(239, 68, 68, 0.15);   color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); }
 
-.tagMedium {
-  background-color: rgba(245, 158, 11, 0.15);
-  color: #F59E0B;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.tagHard {
-  background-color: rgba(239, 68, 68, 0.15);
-  color: #EF4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-/* Daily quest indicator */
 .dailyBadge {
   font-size: 0.65rem;
   color: #64748B;
 }
 
-/* Action button base */
 .cardActions {
   display: flex;
   gap: 0.5rem;
@@ -97,13 +80,8 @@
   transition: transform 0.15s, opacity 0.15s;
 }
 
-.actionBtn:hover {
-  transform: scale(1.1);
-}
-
-.actionBtn:active {
-  transform: scale(0.95);
-}
+.actionBtn:hover  { transform: scale(1.1); }
+.actionBtn:active { transform: scale(0.95); }
 
 .completeBtn {
   background-color: rgba(139, 92, 246, 0.2);
@@ -111,9 +89,7 @@
   border: 1px solid rgba(139, 92, 246, 0.4);
 }
 
-.completeBtn:hover {
-  background-color: rgba(139, 92, 246, 0.35);
-}
+.completeBtn:hover { background-color: rgba(139, 92, 246, 0.35); }
 
 .discardBtn {
   background-color: rgba(239, 68, 68, 0.15);
@@ -121,6 +97,4 @@
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-.discardBtn:hover {
-  background-color: rgba(239, 68, 68, 0.25);
-}
+.discardBtn:hover { background-color: rgba(239, 68, 68, 0.25); }

@@ -1,11 +1,9 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { applyXpGain, applyHpLoss, XP_REWARDS, HP_PENALTIES } from "../utils/levelEngine";
 
-// Step 1: Create the context (it's like an empty container for now)
 const CharacterContext = createContext(null);
 
-// The initial state for a brand new hero - default starting values
 const INITIAL_CHARACTER = {
   name: "Adventurer",
   level: 1,
@@ -15,39 +13,58 @@ const INITIAL_CHARACTER = {
   gold: 0,
 };
 
-// Step 2: The Provider - this wraps our app and PROVIDES the state to everyone inside
 export function CharacterProvider({ children }) {
-  // Using our custom hook so these stats auto-save to localStorage!
+  // Using custom hook so these stats auto-save to localStorage!
   const [character, setCharacter] = useLocalStorage("zenith-character", INITIAL_CHARACTER);
 
-  // Called when a quest is completed - grants XP and Gold based on difficulty
+  // Tracks whether a level-up just happened so the modal can trigger
+  // This lives in regular useState - no need to persist it across refreshes
+  const [levelUpData, setLevelUpData] = useState(null); // null = no modal, {level} = show modal
+
+  // Tracks whether HP was just lost so the header bar can shake
+  const [hpShake, setHpShake] = useState(false);
+
   const completeQuest = (difficulty) => {
     const reward = XP_REWARDS[difficulty];
     setCharacter((prev) => {
-      // First apply XP (handles leveling up internally)
       const afterXp = applyXpGain(prev, reward.xp);
-      // Then add the gold reward
-      return { ...afterXp, gold: afterXp.gold + reward.gold };
+      const afterGold = { ...afterXp, gold: afterXp.gold + reward.gold };
+
+      // Check if level changed - if so, queue up the level-up modal
+      if (afterGold.level > prev.level) {
+        setLevelUpData({ newLevel: afterGold.level });
+      }
+
+      return afterGold;
     });
   };
 
-  // Called when a Daily quest is failed/missed - ouch, that hurts HP
   const failDailyQuest = (difficulty) => {
     const penalty = HP_PENALTIES[difficulty];
     setCharacter((prev) => applyHpLoss(prev, penalty));
+
+    // Trigger the shake animation on the HP bar
+    setHpShake(true);
+    // Reset shake flag after animation completes so it can fire again next time
+    setTimeout(() => setHpShake(false), 600);
   };
 
-  // Reset button for testing - lets me wipe my save and start fresh
+  // Called by the modal's close button to dismiss it
+  const dismissLevelUp = () => setLevelUpData(null);
+
   const resetCharacter = () => {
     setCharacter(INITIAL_CHARACTER);
+    setLevelUpData(null);
   };
 
-  // Step 3: Pass everything down through the context value
   const value = {
     character,
     completeQuest,
     failDailyQuest,
     resetCharacter,
+    levelUpData,
+    dismissLevelUp,
+    hpShake,
   };
 
   return (
@@ -57,11 +74,10 @@ export function CharacterProvider({ children }) {
   );
 }
 
-// Step 4: Custom hook to consume the context - cleaner than writing useContext everywhere
 export function useCharacter() {
   const context = useContext(CharacterContext);
   if (!context) {
-    throw new Error("useCharacter must be used inside a <CharacterProvider>. Don't forget to wrap!");
+    throw new Error("useCharacter must be used inside a <CharacterProvider>.");
   }
   return context;
 }
