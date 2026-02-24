@@ -4,6 +4,7 @@ import { applyXpGain, applyHpLoss, XP_REWARDS, HP_PENALTIES } from "../utils/lev
 
 const CharacterContext = createContext(null);
 
+// Default starting stats for a brand new hero
 const INITIAL_CHARACTER = {
   name: "Adventurer",
   level: 1,
@@ -18,19 +19,20 @@ export function CharacterProvider({ children }) {
   const [character, setCharacter] = useLocalStorage("zenith-character", INITIAL_CHARACTER);
 
   // Tracks whether a level-up just happened so the modal can trigger
-  // This lives in regular useState - no need to persist it across refreshes
-  const [levelUpData, setLevelUpData] = useState(null); // null = no modal, {level} = show modal
+  // Lives in regular useState — no need to persist this across refreshes
+  const [levelUpData, setLevelUpData] = useState(null);
 
   // Tracks whether HP was just lost so the header bar can shake
   const [hpShake, setHpShake] = useState(false);
 
+  // Called when a quest is completed — grants XP and Gold based on difficulty
   const completeQuest = (difficulty) => {
     const reward = XP_REWARDS[difficulty];
     setCharacter((prev) => {
-      const afterXp = applyXpGain(prev, reward.xp);
+      const afterXp   = applyXpGain(prev, reward.xp);
       const afterGold = { ...afterXp, gold: afterXp.gold + reward.gold };
 
-      // Check if level changed - if so, queue up the level-up modal
+      // Check if level changed — if so, queue up the level-up modal
       if (afterGold.level > prev.level) {
         setLevelUpData({ newLevel: afterGold.level });
       }
@@ -39,6 +41,7 @@ export function CharacterProvider({ children }) {
     });
   };
 
+  // Called when a Daily quest is failed/missed — costs HP and triggers shake
   const failDailyQuest = (difficulty) => {
     const penalty = HP_PENALTIES[difficulty];
     setCharacter((prev) => applyHpLoss(prev, penalty));
@@ -49,9 +52,28 @@ export function CharacterProvider({ children }) {
     setTimeout(() => setHpShake(false), 600);
   };
 
+  // Called by the Armory when a player buys an item
+  // Deducts gold cost, then applies either a stat effect or an XP grant
+  const shopPurchase = (cost, effectFn, xpGrant = 0) => {
+    setCharacter((prev) => {
+      if (prev.gold < cost) return prev; // Safety check — can't buy what you can't afford
+      const afterCost   = { ...prev, gold: prev.gold - cost };
+      const afterEffect = effectFn ? effectFn(afterCost) : afterCost;
+      const afterXp     = xpGrant > 0 ? applyXpGain(afterEffect, xpGrant) : afterEffect;
+
+      // Check for level up triggered by an XP grant item
+      if (afterXp.level > prev.level) {
+        setLevelUpData({ newLevel: afterXp.level });
+      }
+
+      return afterXp;
+    });
+  };
+
   // Called by the modal's close button to dismiss it
   const dismissLevelUp = () => setLevelUpData(null);
 
+  // Full reset — wipes character back to starter stats
   const resetCharacter = () => {
     setCharacter(INITIAL_CHARACTER);
     setLevelUpData(null);
@@ -61,6 +83,7 @@ export function CharacterProvider({ children }) {
     character,
     completeQuest,
     failDailyQuest,
+    shopPurchase,
     resetCharacter,
     levelUpData,
     dismissLevelUp,

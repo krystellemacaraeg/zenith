@@ -1,31 +1,42 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CharacterProvider } from "./context/CharacterContext";
-import { QuestProvider } from "./context/QuestContext";
-import HeroHeader from "./components/HeroHeader/HeroHeader";
-import QuestBoard from "./components/QuestBoard/QuestBoard";
-import Sidebar from "./components/Sidebar/Sidebar";
-import LevelUpModal from "./components/LevelUpModal/LevelUpModal";
-import styles from "./App.module.css";
+import { QuestProvider }     from "./context/QuestContext";
+import HeroHeader            from "./components/HeroHeader/HeroHeader";
+import Sidebar               from "./components/Sidebar/Sidebar";
+import LevelUpModal          from "./components/LevelUpModal/LevelUpModal";
+import QuestBoardPage        from "./pages/QuestBoard/QuestBoardPage";
+import ArmoryPage            from "./pages/Armory/ArmoryPage";
+import HistoryPage           from "./pages/History/HistoryPage";
+import SettingsPage          from "./pages/Settings/SettingsPage";
+import styles                from "./App.module.css";
 
 export default function App() {
   return (
-    <CharacterProvider>
-      <QuestProvider>
-        <div className={styles.appShell}>
-          <HeroHeader />
+    // BrowserRouter must wrap everything that uses routing hooks
+    <BrowserRouter>
+      <CharacterProvider>
+        <QuestProvider>
+          <div className={styles.appShell}>
+            <HeroHeader />
 
-          <div className={styles.appBody}>
-            <Sidebar />
+            <div className={styles.appBody}>
+              <Sidebar />
 
-            {/* Main content area - will host different views in Phase 4 */}
-            <main className={styles.mainContent}>
-              <QuestBoard />
-            </main>
+              <main className={styles.mainContent}>
+                {/* Routes renders the first <Route> that matches the current URL */}
+                <Routes>
+                  <Route path="/"         element={<QuestBoardPage />} />
+                  <Route path="/armory"   element={<ArmoryPage />}     />
+                  <Route path="/history"  element={<HistoryPage />}    />
+                  <Route path="/settings" element={<SettingsPage />}   />
+                </Routes>
+              </main>
+            </div>
+
+            <LevelUpModal />
           </div>
-
-          {/* Modal lives outside the layout flow so it overlays everything */}
-          <LevelUpModal />
-        </div>
-      </QuestProvider>
-    </CharacterProvider>
+        </QuestProvider>
+      </CharacterProvider>
+    </BrowserRouter>
   );
 }

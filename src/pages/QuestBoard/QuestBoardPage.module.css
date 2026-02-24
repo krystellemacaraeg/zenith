@@ -51,7 +51,7 @@
   box-sizing: border-box;
 }
 
-.titleInput:focus { border-color: #8B5CF6; }
+.titleInput:focus       { border-color: #8B5CF6; }
 .titleInput::placeholder { color: #475569; }
 
 .formControls {
@@ -61,10 +61,7 @@
   flex-wrap: wrap;
 }
 
-.difficultyGroup {
-  display: flex;
-  gap: 0.35rem;
-}
+.difficultyGroup { display: flex; gap: 0.35rem; }
 
 .difficultyOption {
   padding: 0.3rem 0.7rem;

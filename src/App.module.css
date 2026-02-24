@@ -1,44 +1,26 @@
-/* The dark canvas everything lives on */
 .appShell {
-  min-height: 100vh;
+  height: 100vh;
   background-color: #0D0D12;
   color: #E2E8F0;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* Sidebar + main panel sit side by side below the header */
-.appBody {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-}
-
-.mainContent {
-  flex: 1;
-  overflow-y: auto;
-  /* No padding here - QuestBoard handles its own internal padding */
-}
-
-.appShell {
-  min-height: 100vh;
-  background-color: #0D0D12;
-  color: #E2E8F0;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-}
-
+/* Fills all vertical space below the header — no scrolling on the shell itself */
 .appBody {
   display: flex;
   flex: 1;
   min-height: 0;
   width: 100%;
+  overflow: hidden;
 }
 
+/* Main content scrolls independently, sidebar stays fixed */
 .mainContent {
   flex: 1;
   overflow-y: auto;
+  min-width: 0;
   width: 100%;
 }

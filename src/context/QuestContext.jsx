@@ -5,13 +5,11 @@ import { HP_PENALTIES } from "../utils/levelEngine";
 
 const QuestContext = createContext(null);
 
-// Difficulty tags and their visual label - single source of truth
 export const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 
-// Each quest gets a unique ID using Date.now() - simple, works for this scale
 function createQuest(title, difficulty, isDaily = false) {
   return {
-    id: Date.now() + Math.random(), // Math.random() prevents collisions if two quests are added fast
+    id: Date.now() + Math.random(),
     title,
     difficulty,
     isDaily,
@@ -20,7 +18,6 @@ function createQuest(title, difficulty, isDaily = false) {
   };
 }
 
-// Seeded starting quests so the board isn't empty on first launch
 const INITIAL_QUESTS = [
   createQuest("Meditate for 10 minutes", "Easy", true),
   createQuest("Study React for 1 hour", "Medium", false),
@@ -29,35 +26,40 @@ const INITIAL_QUESTS = [
 ];
 
 export function QuestProvider({ children }) {
-  // Quests persist to localStorage - survived refreshes just like character stats
   const [quests, setQuests] = useLocalStorage("zenith-quests", INITIAL_QUESTS);
+  // Completed quests history — persisted so it survives refresh
+  const [completedQuests, setCompletedQuests] = useLocalStorage("zenith-history", []);
   const { completeQuest, failDailyQuest } = useCharacter();
 
-  // Add a new quest to the board
   const addQuest = (title, difficulty, isDaily) => {
     const newQuest = createQuest(title, difficulty, isDaily);
-    setQuests((prev) => [newQuest, ...prev]); // New quests appear at the top
+    setQuests((prev) => [newQuest, ...prev]);
   };
 
-  // Complete a quest - rewards XP/Gold, then removes it from the board
   const completeQuestById = (id) => {
     const quest = quests.find((q) => q.id === id);
     if (!quest) return;
-    completeQuest(quest.difficulty); // Fires the XP/Gold reward from CharacterContext
+    completeQuest(quest.difficulty);
+
+    // Log the completed quest to history before removing it from the board
+    const completedEntry = { ...quest, completedAt: new Date().toISOString() };
+    setCompletedQuests((prev) => [completedEntry, ...prev]);
     setQuests((prev) => prev.filter((q) => q.id !== id));
   };
 
-  // Discard a quest - if it was a Daily, punish HP. Non-dailies just disappear.
   const discardQuest = (id) => {
     const quest = quests.find((q) => q.id === id);
     if (!quest) return;
     if (quest.isDaily) {
-      failDailyQuest(quest.difficulty); // Daily abandonment costs HP - this is the consequence mechanic
+      failDailyQuest(quest.difficulty);
     }
     setQuests((prev) => prev.filter((q) => q.id !== id));
   };
 
-  const value = { quests, addQuest, completeQuestById, discardQuest };
+  // Wipe the history log — available in Settings page
+  const clearHistory = () => setCompletedQuests([]);
+
+  const value = { quests, addQuest, completeQuestById, discardQuest, completedQuests, clearHistory };
 
   return (
     <QuestContext.Provider value={value}>
@@ -68,8 +70,6 @@ export function QuestProvider({ children }) {
 
 export function useQuests() {
   const context = useContext(QuestContext);
-  if (!context) {
-    throw new Error("useQuests must be used inside a <QuestProvider>.");
-  }
+  if (!context) throw new Error("useQuests must be used inside a <QuestProvider>.");
   return context;
 }

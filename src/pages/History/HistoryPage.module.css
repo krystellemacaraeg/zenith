@@ -1,0 +1,96 @@
+.pageWrapper {
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.pageTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+
+.pageSubtitle {
+  font-size: 0.85rem;
+  color: #475569;
+  margin-bottom: 1.75rem;
+}
+
+.clearBtn {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #EF4444;
+  border-radius: 8px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.clearBtn:hover { background-color: rgba(239, 68, 68, 0.1); }
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.historyEntry {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #16161E;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.85rem 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.entryInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.entryTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #94A3B8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entryDate {
+  font-size: 0.72rem;
+  color: #334155;
+  margin-top: 0.2rem;
+}
+
+.checkmark {
+  color: #10B981;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.diffTag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.tagEasy   { background-color: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.tagMedium { background-color: rgba(245, 158, 11, 0.15);  color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+.tagHard   { background-color: rgba(239, 68, 68, 0.15);   color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); }

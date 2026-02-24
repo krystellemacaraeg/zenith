@@ -19,6 +19,13 @@
   padding: 0;
 }
 
+/* html and body must be full height or the app shell can't fill the viewport */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #0D0D12;
+}
+
 
 a {
   font-weight: 500;

@@ -1,0 +1,115 @@
+.pageWrapper {
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.pageTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+
+.goldDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FDE68A;
+}
+
+.pageSubtitle {
+  font-size: 0.85rem;
+  color: #475569;
+  margin-bottom: 1.75rem;
+}
+
+/* Responsive grid — 1 col on narrow, 2 on wide */
+.itemGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.itemCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #16161E;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  border-left: 3px solid rgba(245, 158, 11, 0.4);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.itemCard:hover {
+  border-left-color: #F59E0B;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.08);
+}
+
+/* Greyed out when player can't afford */
+.itemCardDisabled {
+  opacity: 0.45;
+  border-left-color: rgba(255, 255, 255, 0.06);
+}
+
+.itemIcon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  width: 42px;
+  text-align: center;
+}
+
+.itemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemName {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  margin-bottom: 0.2rem;
+}
+
+.itemDesc {
+  font-size: 0.78rem;
+  color: #64748B;
+  line-height: 1.4;
+}
+
+.buyBtn {
+  flex-shrink: 0;
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.buyBtn:hover:not(:disabled) {
+  background-color: rgba(245, 158, 11, 0.28);
+  transform: scale(1.04);
+}
+
+.buyBtn:disabled { cursor: not-allowed; }
+
+.btnGold {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FDE68A;
+}
