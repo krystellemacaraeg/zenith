@@ -1,0 +1,149 @@
+/* Sticky header - always visible, everything scrolls beneath it */
+.heroHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #16161E;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Inner wrapper mirrors the pageContent centering */
+.heroInner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Avatar circle - violet ring border */
+.avatarWrapper {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #8B5CF6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0D0D12;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.35);
+}
+
+/* The block holding both HP and XP bars */
+.statsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Each label + track + numbers row */
+.statBarGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+/* The grey track that the fill sits inside */
+.statTrack {
+  flex: 1;
+  height: 8px;
+  background-color: #0D0D12;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Base fill styles - color classes applied per bar */
+.statFill {
+  height: 100%;
+  border-radius: 999px;
+  /* Width is controlled by Framer Motion's animate prop, not here */
+}
+
+.hpFill {
+  background-color: #EF4444;
+}
+
+.xpFill {
+  background-color: #8B5CF6;
+}
+
+/* XP bar glow - makes the bar look lit from within */
+.xpGlow {
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.7), 0 0 16px rgba(139, 92, 246, 0.35);
+}
+
+.statNumbers {
+  font-size: 0.65rem;
+  color: #64748B;
+  width: 52px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Gold bordered level circle */
+.levelBadge {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #F59E0B;
+  background-color: #0D0D12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.levelLabel {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #F59E0B;
+  line-height: 1;
+}
+
+.levelNumber {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #FDE68A;
+  line-height: 1;
+}
+
+/* Gold counter beside the level badge */
+.goldCounter {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
+
+.goldIcon {
+  color: #F59E0B;
+  font-size: 0.85rem;
+}
+
+.goldAmount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FDE68A;
+}

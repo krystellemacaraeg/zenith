@@ -4,7 +4,13 @@
   background-color: #0D0D12;
   color: #E2E8F0;
   font-family: 'Inter', sans-serif;
-  padding: 2rem;
+}
+
+/* Centered content area - will become a sidebar + main grid in Phase 3 */
+.pageContent {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 /* Temporary debug panel styling - functional ugly, not final UI */
