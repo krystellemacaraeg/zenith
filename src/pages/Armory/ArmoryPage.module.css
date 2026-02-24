@@ -113,3 +113,8 @@
   font-weight: 700;
   color: #FDE68A;
 }
+
+@media (max-width: 768px) {
+  .pageWrapper { padding: 1rem; }
+  .itemGrid    { grid-template-columns: 1fr; }
+}

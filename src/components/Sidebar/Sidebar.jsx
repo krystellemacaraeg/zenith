@@ -2,15 +2,16 @@ import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
 const NAV_ITEMS = [
-  { to: "/",        icon: "⚔️",  label: "Quest Board"  },
-  { to: "/armory",  icon: "🛡️",  label: "The Armory"   },
-  { to: "/history", icon: "📜",  label: "History"      },
-  { to: "/settings",icon: "⚙️",  label: "Settings"     },
+  { to: "/",         icon: "⚔️",  label: "Quest Board"  },
+  { to: "/armory",   icon: "🛡️",  label: "The Armory"   },
+  { to: "/history",  icon: "📜",  label: "History"      },
+  { to: "/settings", icon: "⚙️",  label: "Settings"     },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   return (
-    <aside className={styles.sidebar}>
+    // On mobile: sidebar slides in from the left when isOpen is true
+    <aside className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ""}`}>
       <div className={styles.brand}>
         <span className={styles.brandIcon}>🏔️</span>
         <span className={styles.brandName}>Zenith</span>
@@ -21,8 +22,9 @@ export default function Sidebar() {
           <NavLink
             key={item.to}
             to={item.to}
-            // "end" on the root route prevents it matching every route
             end={item.to === "/"}
+            // Close the sidebar after navigating on mobile
+            onClick={onClose}
             className={({ isActive }) =>
               `${styles.navItem} ${isActive ? styles.navItemActive : ""}`
             }

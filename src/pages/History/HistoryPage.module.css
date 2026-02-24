@@ -94,3 +94,7 @@
 .tagEasy   { background-color: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
 .tagMedium { background-color: rgba(245, 158, 11, 0.15);  color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
 .tagHard   { background-color: rgba(239, 68, 68, 0.15);   color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+@media (max-width: 768px) {
+  .pageWrapper { padding: 1rem; }
+}

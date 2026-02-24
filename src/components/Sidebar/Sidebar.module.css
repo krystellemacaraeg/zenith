@@ -1,6 +1,5 @@
 .sidebar {
   width: 220px;
-  /* Fill the full appBody height, not the full viewport */
   height: 100%;
   background-color: #16161E;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
@@ -9,6 +8,8 @@
   padding: 1.5rem 0.75rem;
   flex-shrink: 0;
   overflow-y: auto;
+  /* Smooth slide transition on mobile */
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .brand {
@@ -18,7 +19,6 @@
   padding: 0 0.5rem 1.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   margin-bottom: 1rem;
-  text-decoration: none;
 }
 
 .brandIcon { font-size: 1.4rem; }
@@ -59,7 +59,7 @@
 .navItemActive {
   color: #E2E8F0;
   background-color: rgba(139, 92, 246, 0.15);
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.25);
 }
 
 .navIcon  { font-size: 1rem; flex-shrink: 0; }
@@ -72,4 +72,25 @@
   color: #334155;
   line-height: 1.6;
   font-style: italic;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .sidebar {
+    /* On mobile the sidebar is a fixed drawer that slides in from the left */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 99;
+    transform: translateX(-100%);
+    /* Add top padding so it clears the header */
+    padding-top: 1rem;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+  }
+
+  /* When isOpen is true, App.jsx adds this class to slide it in */
+  .sidebarOpen {
+    transform: translateX(0);
+  }
 }

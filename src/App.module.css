@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-/* Fills all vertical space below the header — no scrolling on the shell itself */
+/* Fills all vertical space below the header - no scrolling on the shell itself */
 .appBody {
   display: flex;
   flex: 1;
@@ -23,4 +23,47 @@
   overflow-y: auto;
   min-width: 0;
   width: 100%;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.appShell {
+  height: 100vh;
+  background-color: #0D0D12;
+  color: #E2E8F0;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.appBody {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Dark overlay behind the open sidebar on mobile */
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 98;
+  }
 }

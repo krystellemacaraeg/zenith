@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CharacterProvider } from "./context/CharacterContext";
 import { QuestProvider }     from "./context/QuestContext";
@@ -11,19 +12,31 @@ import SettingsPage          from "./pages/Settings/SettingsPage";
 import styles                from "./App.module.css";
 
 export default function App() {
+  // Controls whether the sidebar drawer is open on mobile
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    // BrowserRouter must wrap everything that uses routing hooks
     <BrowserRouter>
       <CharacterProvider>
         <QuestProvider>
           <div className={styles.appShell}>
-            <HeroHeader />
+            <HeroHeader onMenuToggle={() => setSidebarOpen((o) => !o)} />
 
             <div className={styles.appBody}>
-              <Sidebar />
+              {/* Backdrop - tapping it closes the sidebar on mobile */}
+              {sidebarOpen && (
+                <div
+                  className={styles.backdrop}
+                  onClick={() => setSidebarOpen(false)}
+                />
+              )}
+
+              <Sidebar
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+              />
 
               <main className={styles.mainContent}>
-                {/* Routes renders the first <Route> that matches the current URL */}
                 <Routes>
                   <Route path="/"         element={<QuestBoardPage />} />
                   <Route path="/armory"   element={<ArmoryPage />}     />
